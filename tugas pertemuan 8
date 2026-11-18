@@ -1,0 +1,213 @@
+
+# =====================================
+# TUGAS STRUKTUR DATA PYTHON
+# Array, Linked List, dan Tuple
+# =====================================
+
+# -------------------------------------
+# 1. ARRAY
+# -------------------------------------
+
+data_array = []
+
+def menu_array():
+    while True:
+        print("\n=== MENU ARRAY ===")
+        print("1. Tambah Data")
+        print("2. Tampilkan Data")
+        print("3. Ubah Data")
+        print("4. Hapus Data")
+        print("5. Kembali")
+
+        pilihan = input("Pilih menu: ")
+
+        if pilihan == "1":
+            data = input("Masukkan data: ")
+            data_array.append(data)
+            print("Data berhasil ditambahkan!")
+
+        elif pilihan == "2":
+            print("\nData Array:")
+            if len(data_array) == 0:
+                print("Array masih kosong.")
+            else:
+                for i, data in enumerate(data_array):
+                    print(i, ".", data)
+
+        elif pilihan == "3":
+            try:
+                index = int(input("Masukkan nomor index: "))
+                if 0 <= index < len(data_array):
+                    data_baru = input("Masukkan data baru: ")
+                    data_array[index] = data_baru
+                    print("Data berhasil diubah!")
+                else:
+                    print("Index tidak ditemukan.")
+            except ValueError:
+                print("Masukkan angka yang benar.")
+
+        elif pilihan == "4":
+            try:
+                index = int(input("Masukkan nomor index: "))
+                if 0 <= index < len(data_array):
+                    data_array.pop(index)
+                    print("Data berhasil dihapus!")
+                else:
+                    print("Index tidak ditemukan.")
+            except ValueError:
+                print("Masukkan angka yang benar.")
+
+        elif pilihan == "5":
+            break
+
+        else:
+            print("Pilihan tidak valid!")
+
+
+# -------------------------------------
+# 2. LINKED LIST
+# -------------------------------------
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def tambah_data(self, data):
+        node_baru = Node(data)
+
+        if self.head is None:
+            self.head = node_baru
+        else:
+            current = self.head
+
+            while current.next is not None:
+                current = current.next
+
+            current.next = node_baru
+
+        print("Data berhasil ditambahkan!")
+
+    def tampilkan_data(self):
+        current = self.head
+
+        if current is None:
+            print("Linked List masih kosong.")
+            return
+
+        print("\nData Linked List:")
+
+        while current is not None:
+            print(current.data, end=" -> ")
+            current = current.next
+
+        print("None")
+
+    def hapus_data(self, data):
+        current = self.head
+        previous = None
+
+        while current is not None:
+            if current.data == data:
+
+                if previous is None:
+                    self.head = current.next
+                else:
+                    previous.next = current.next
+
+                print("Data berhasil dihapus!")
+                return
+
+            previous = current
+            current = current.next
+
+        print("Data tidak ditemukan.")
+
+
+linked_list = LinkedList()
+
+
+def menu_linked_list():
+    while True:
+        print("\n=== MENU LINKED LIST ===")
+        print("1. Tambah Data")
+        print("2. Tampilkan Data")
+        print("3. Hapus Data")
+        print("4. Kembali")
+
+        pilihan = input("Pilih menu: ")
+
+        if pilihan == "1":
+            data = input("Masukkan data: ")
+            linked_list.tambah_data(data)
+
+        elif pilihan == "2":
+            linked_list.tampilkan_data()
+
+        elif pilihan == "3":
+            data = input("Masukkan data yang ingin dihapus: ")
+            linked_list.hapus_data(data)
+
+        elif pilihan == "4":
+            break
+
+        else:
+            print("Pilihan tidak valid!")
+
+
+# -------------------------------------
+# 3. TUPLE
+# -------------------------------------
+
+data_tuple = ("Python", "Array", "Linked List", "Tuple")
+
+
+def menu_tuple():
+    print("\n=== MENU TUPLE ===")
+    print("Data Tuple:", data_tuple)
+
+    print("\nMengakses Data Tuple:")
+    for i, data in enumerate(data_tuple):
+        print("Index", i, ":", data)
+
+    print("\nJumlah Data:", len(data_tuple))
+
+    print("\nTuple bersifat immutable.")
+    print("Artinya data tidak dapat diubah setelah dibuat.")
+
+
+# -------------------------------------
+# MENU UTAMA
+# -------------------------------------
+
+while True:
+    print("\n================================")
+    print("     PROGRAM STRUKTUR DATA")
+    print("================================")
+    print("1. Array")
+    print("2. Linked List")
+    print("3. Tuple")
+    print("4. Keluar")
+
+    pilihan = input("Pilih menu: ")
+
+    if pilihan == "1":
+        menu_array()
+
+    elif pilihan == "2":
+        menu_linked_list()
+
+    elif pilihan == "3":
+        menu_tuple()
+
+    elif pilihan == "4":
+        print("\nTerima kasih telah menggunakan program!")
+        break
+
+    else:
+        print("Pilihan tidak valid!")
